@@ -15,7 +15,6 @@ public class MovieReview {
 	public static void main(String args[]) {
 
 		// variables for keeping track of the input file
-		String line;
 		int score;
 		List<String> fileLines;
 
@@ -26,7 +25,7 @@ public class MovieReview {
 
 		// open input file
 		try {
-			// Read each line into a list
+			// Read each movieReview into a list
 			fileLines = Files.readAllLines(Paths.get("moviereviews.txt"));
 		} catch(IOException e) {
 			System.err.println("Unable to read moviereviews.txt file");
@@ -34,28 +33,25 @@ public class MovieReview {
 		}
 		
 		/**
-		 * This logic reads through each input line and extracts each separate word.
+		 * This logic reads through each input movieReview and extracts each separate word.
 		 */
 
-		Iterator<String> itr = fileLines.iterator();
+		//Iterator<String> itr = fileLines.iterator();
 
 		Dictionary<String,WordEntry> dictionary = new HashDictionary<>();
 
-		while (itr.hasNext()) {
-			// get the next line in the movie reviews
-			line = itr.next();
-			
+		for (String movieReview: fileLines) {
 			// obtain the score
-			score = Integer.parseInt(line.substring(0, 1));
+			score = Integer.parseInt(movieReview.substring(0, 1));
 			
 			// remove the score from the review
-			line = line.substring(2).trim();
+			movieReview = movieReview.substring(2).trim();
 
 			// now remove all non alphanumeric characters
-			line = line.replaceAll("[^a-zA-Z]+", " ");
+			movieReview = movieReview.replaceAll("[^a-zA-Z]+", " ");
 
-			// splits the line into each word
-			String tokens[] = line.split(" ");
+			// splits the movieReview into each word
+			String tokens[] = movieReview.split(" ");
 			
 			/**
 			 * At this point, score is the numeric value of the review
